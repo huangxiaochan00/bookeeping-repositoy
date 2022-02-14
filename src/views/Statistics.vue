@@ -1,20 +1,18 @@
 <template>
   <div>
-    <div>computed.vue</div>
-    <Nav />
+    <Layout>Statistics.vue</Layout>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Nav from "@/components/Nav.vue";
 
-export default Vue.extend({
-  components: { Nav },
-});
+//import Nav from "@/components/Nav.vue";
+export default {
+  // components: { Nav },
+  name: "Statistics",
+};
 </script>
 
 <style scoped>
 </style>
-
-
