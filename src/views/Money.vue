@@ -1,14 +1,16 @@
 <template>
   <div>
     <div>Money.vue</div>
-    <router-view />
+    <Nav />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-
-export default Vue.extend({});
+import Nav from "@/components/Nav.vue";
+export default {
+  components: { Nav },
+};
 </script>
 
 <style scoped>
