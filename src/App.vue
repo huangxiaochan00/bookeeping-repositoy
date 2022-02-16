@@ -5,10 +5,21 @@
 </template>
 
 <style lang="scss">
-body {
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+body {
+  margin: 0 auto;
+  line-height: 1.5;
+  font-family: $font-hei;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a {
+  color: inherit;
+  text-decoration: none;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

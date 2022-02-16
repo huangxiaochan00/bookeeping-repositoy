@@ -9,21 +9,21 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Nav from "@/components/Nav.vue";
+// import Nav from "@/components/Nav.vue";
 export default {
-  components: { Nav },
+  // components: { Nav },
 };
 </script>
 
 <style scoped>
 .nav-wrapper {
-  border: 1px red solid;
+  /* border: 1px red solid; */
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 .nav-content {
-  border: 1px green solid;
+  /* border: 1px green solid; */
   flex-grow: 1;
   overflow: auto;
 }
