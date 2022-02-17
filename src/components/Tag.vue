@@ -22,9 +22,10 @@ import Vue from "vue";
 export default class Tag extends Vue {
   @Prop() dataSource: string[] | undefined;
   selectedTag = "衣";
-  selected(tag) {
+  selected(tag: string) {
     this.selectedTag = tag;
-    console.log(this.selectedTag);
+    // console.log(this.selectedTag);
+    this.$emit("update:selected", this.selectedTag);
   }
   create() {
     const name = window.prompt("输出标签名");

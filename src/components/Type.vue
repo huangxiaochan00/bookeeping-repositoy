@@ -16,13 +16,13 @@ import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 @Component
 export default class Type extends Vue {
-  type = "-";
+  @Prop(String) readonly type!: string;
   selectedType(type: string) {
     // if (type !== "-" || type != ="+") {
     //   throw new Error("type is unknown");
     // }
-    this.type = type;
-    console.log(this.type);
+
+    this.$emit("update:type", type);
   }
 }
 </script>

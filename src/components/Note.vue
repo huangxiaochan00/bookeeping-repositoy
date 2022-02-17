@@ -9,12 +9,15 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import { Component, Prop, Watch } from "vue-property-decorator";
 
 @Component
 export default class Note extends Vue {
   value = "";
-  // console.log(this.value);
+  @Watch("value")
+  onChangeValue(value: string) {
+    this.$emit("update:note", value);
+  }
 }
 </script>
 
