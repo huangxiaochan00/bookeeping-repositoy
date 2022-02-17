@@ -1,22 +1,29 @@
 <template>
   <div class="note">
     <label>
-      <span>备注</span>
-      <input />
+      <span class="name">备注</span>
+      <input type="text" v-model="value" placeholder="在这里添加备注" />
     </label>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { Component, Prop } from "vue-property-decorator";
 
-export default Vue.extend({});
+@Component
+export default class Note extends Vue {
+  value = "";
+  // console.log(this.value);
+}
 </script>
 
 <style scoped lang="scss">
 .note {
   background: rgb(244, 246, 245);
-  font-size: 14px;
+  font-size: 18px;
+  padding: 10px 0;
+  // height: 60px;
   > label {
     display: flex;
     align-items: center;
@@ -31,6 +38,7 @@ export default Vue.extend({});
       height: 32px;
       background: none;
       border: none;
+      outline: none;
     }
   }
 }
