@@ -1,20 +1,40 @@
 <template>
   <div class="tag">
     <ol>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
+      <li
+        :class="selectedTag == tag ? 'selected' : ''"
+        v-for="tag in dataSource"
+        :key="tag"
+        @click="selected(tag)"
+      >
+        {{ tag }}
+      </li>
 
-      <li>添加</li>
+      <li @click="create">添加</li>
     </ol>
   </div>
 </template>
 
 <script lang="ts">
+import { Component, Prop } from "vue-property-decorator";
 import Vue from "vue";
-
-export default Vue.extend({});
+@Component
+export default class Tag extends Vue {
+  @Prop() dataSource: string[] | undefined;
+  selectedTag = "衣";
+  selected(tag) {
+    this.selectedTag = tag;
+    console.log(this.selectedTag);
+  }
+  create() {
+    const name = window.prompt("输出标签名");
+    if (name === "") {
+      window.alert("标签名不能为空");
+    } else if (this.dataSource) {
+      this.$emit("update:dataSource", [...this.dataSource, name]);
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
