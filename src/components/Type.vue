@@ -18,9 +18,9 @@ import { Component, Prop } from "vue-property-decorator";
 export default class Type extends Vue {
   type = "-";
   selectedType(type: string) {
-    //   if (type !== "-" || type != ="+") {
-    //     throw new Error("type is unknown");
-    //   }
+    // if (type !== "-" || type != ="+") {
+    //   throw new Error("type is unknown");
+    // }
     this.type = type;
     console.log(this.type);
   }
