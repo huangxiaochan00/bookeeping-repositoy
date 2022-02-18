@@ -1,25 +1,22 @@
 <template>
   <Layout>
     <ol>
-      <li class="tag">
-        <span>衣</span>
+      <!-- <li class="tag" v-for="tag in tags" :key="tag">
+        <span>{{ tag }}</span>
         <Icon name="right" class="icon" />
-      </li>
-      <li class="tag">
-        <span>食</span>
+      </li> -->
+      <router-link
+        class="tag"
+        v-for="tag in tags"
+        :key="tag.id"
+        :to="`/labels/edit/${tag.id}`"
+      >
+        <span>{{ tag.name }}</span>
         <Icon name="right" class="icon" />
-      </li>
-      <li class="tag">
-        <span>住</span>
-        <Icon name="right" class="icon" />
-      </li>
-      <li class="tag">
-        <span>行</span>
-        <Icon name="right" class="icon" />
-      </li>
+      </router-link>
     </ol>
     <div class="createTag-wrapper">
-      <button>新增标签</button>
+      <button @click="createTag">新增标签</button>
     </div>
   </Layout>
 </template>
@@ -27,10 +24,22 @@
 <script lang="ts">
 import Vue from "vue";
 //import Nav from "@/components/Nav.vue";
-export default {
-  name: "Labels",
-  //components: { Nav },
-};
+import { Component, Prop, Watch } from "vue-property-decorator";
+import tagListModel from "@/models/tagListModel.ts";
+tagListModel.fetch();
+@Component
+export default class Label extends Vue {
+  tags = tagListModel.data;
+  createTag() {
+    const name = window.prompt("输出标签名");
+    if (name === "") {
+      window.alert("标签名不能为空");
+      return;
+    } else {
+      tagListModel.create(name);
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
