@@ -1,14 +1,10 @@
 <template>
-  <div>
-    <Layout class-prefix="money">
-      <!-- {{ record }}
-      {{ recordList }} -->
-      <NumberPad :amount.sync="record.amount" @submit="saveRecord" />
-      <Type :type.sync="record.type" />
-      <Note @update:note="onUpdateNote" />
-      <Tag :dataSource.sync="tags" @update:selected="onUpdateSelected" />
-    </Layout>
-  </div>
+  <Layout class-prefix="money">
+    <NumberPad :amount.sync="record.amount" @submit="saveRecord" />
+    <Type :type.sync="record.type" />
+    <Note @update:note="onUpdateNote" />
+    <Tag :dataSource.sync="tags" @update:selected="onUpdateSelected" />
+  </Layout>
 </template>
 
 <script lang='ts'>
@@ -40,12 +36,10 @@ export default class Money extends Vue {
 
   onUpdateSelected(tag: string) {
     this.record.tag = tag;
-    // console.log(tag);
   }
 
   onUpdateNote(note: string) {
     this.record.note = note;
-    // console.log(note);
   }
   saveRecord() {
     const record2 = model.clone(this.record);
