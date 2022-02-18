@@ -1,8 +1,8 @@
 <template>
   <div class="note">
     <label>
-      <span class="name">备注</span>
-      <input type="text" v-model="value" placeholder="在这里添加备注" />
+      <span class="name">{{ this.fileName }}</span>
+      <input type="text" v-model="value" :placeholder="this.placeholder" />
     </label>
   </div>
 </template>
@@ -14,6 +14,9 @@ import { Component, Prop, Watch } from "vue-property-decorator";
 @Component
 export default class Note extends Vue {
   value = "";
+  @Prop({ require: true }) fileName!: string;
+  @Prop() placeholder?: string;
+
   @Watch("value")
   onChangeValue(value: string) {
     this.$emit("update:note", value);

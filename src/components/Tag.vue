@@ -4,10 +4,10 @@
       <li
         :class="selectedTag == tag ? 'selected' : ''"
         v-for="tag in dataSource"
-        :key="tag"
+        :key="tag.id"
         @click="selected(tag)"
       >
-        {{ tag }}
+        {{ tag.name }}
       </li>
 
       <li @click="create">添加</li>

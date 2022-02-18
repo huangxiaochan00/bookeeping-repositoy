@@ -1,6 +1,28 @@
 <template>
   <div>
-    <Layout>EditTag.vue</Layout>
+    <Layout>
+      <div class="navBar">
+        <Icon name="back" @click="goBack" />
+        <span>编辑标签</span>
+        <div></div>
+      </div>
+      <div class="form">
+        <Note file-name="标签名" placeholder="请输入标签名" />
+      </div>
+
+      <!-- <div class="form">
+      <FormItem
+        classPrefix="labelform"
+        :value="tag.name"
+        @update:value="update"
+        field-name="标签名"
+        placeholder="请输入标签名"
+      />
+    </div> -->
+      <div class="button-wrapper">
+        <button @click="remove">删除标签</button>
+      </div>
+    </Layout>
   </div>
 </template>
 
@@ -8,11 +30,15 @@
 import Vue from "vue";
 
 //import Nav from "@/components/Nav.vue";
-// import EditTag from '@/views/EditTag.vue';
+import Note from "@/components/Note.vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import tagListModel from "@/models/tagListModel.ts";
 
-@Component
+@Component({
+  components: {
+    Note,
+  },
+})
 export default class EditTag extends Vue {
   created() {
     const id = this.$route.params.id;
@@ -24,6 +50,9 @@ export default class EditTag extends Vue {
     if (!tag) {
       this.$router.replace("/404");
     }
+  }
+  remove() {
+    console.log("remove");
   }
   // components: { Nav },
   //   name: "Statistics",
