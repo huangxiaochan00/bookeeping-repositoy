@@ -7,18 +7,13 @@
         <div></div>
       </div>
       <div class="form">
-        <Note file-name="标签名" placeholder="请输入标签名" />
+        <Note
+          :value="tag.name"
+          file-name="标签名"
+          placeholder="在这里修改标签名"
+          @update:note="updateTag"
+        />
       </div>
-
-      <!-- <div class="form">
-      <FormItem
-        classPrefix="labelform"
-        :value="tag.name"
-        @update:value="update"
-        field-name="标签名"
-        placeholder="请输入标签名"
-      />
-    </div> -->
       <div class="button-wrapper">
         <Button @click="remove">删除标签</Button>
       </div>
@@ -42,22 +37,37 @@ import Button from "@/components/Button.vue";
   },
 })
 export default class EditTag extends Vue {
+  tag?: { id: string; name: string } = undefined;
   created() {
     const id = this.$route.params.id;
     tagListModel.fetch();
     const tags = tagListModel.data;
     const tag = tags.filter((t) => t.id === id)[0];
-    console.log(tag);
+    // console.log(tag);
 
     if (!tag) {
       this.$router.replace("/404");
+    } else {
+      this.tag = tag;
     }
   }
   remove() {
-    console.log("remove");
+    if (this.tag) {
+      tagListModel.remove(this.tag.id);
+    }
   }
-  // components: { Nav },
-  //   name: "Statistics",
+  goBack() {
+    if (!this.tag.name) {
+      alert("标签名不能为空");
+      return;
+    }
+    this.$router.back();
+  }
+  updateTag(name: string) {
+    if (this.tag) {
+      tagListModel.update(this.tag.id, name);
+    }
+  }
 }
 </script>
 <style scoped lang="scss">
