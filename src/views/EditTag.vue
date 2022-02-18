@@ -20,7 +20,7 @@
       />
     </div> -->
       <div class="button-wrapper">
-        <button @click="remove">删除标签</button>
+        <Button @click="remove">删除标签</Button>
       </div>
     </Layout>
   </div>
@@ -33,10 +33,12 @@ import Vue from "vue";
 import Note from "@/components/Note.vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import tagListModel from "@/models/tagListModel.ts";
+import Button from "@/components/Button.vue";
 
 @Component({
   components: {
     Note,
+    Button,
   },
 })
 export default class EditTag extends Vue {

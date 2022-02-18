@@ -11,7 +11,9 @@
     </router-link>
 
     <div class="createTag-wrapper">
-      <button @click="createTag">新增标签</button>
+      <!-- <router-link to="/labels/add"> -->
+      <Button @click="createTag">新增标签</Button>
+      <!-- </router-link> -->
     </div>
   </Layout>
 </template>
@@ -21,8 +23,13 @@ import Vue from "vue";
 //import Nav from "@/components/Nav.vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import tagListModel from "@/models/tagListModel.ts";
+import Button from "@/components/Button.vue";
 tagListModel.fetch();
-@Component
+@Component({
+  components: {
+    Button,
+  },
+})
 export default class Label extends Vue {
   tags = tagListModel.data;
   createTag() {
