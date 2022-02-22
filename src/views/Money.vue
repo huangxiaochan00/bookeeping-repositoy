@@ -7,7 +7,7 @@
       placeholder="在这里添加备注"
       @update:note="onUpdateNote"
     />
-    <Tag :dataSource.sync="tags" @update:selected="onUpdateSelected" />
+    <Tag :dataSource="tags" @update:selected="onUpdateSelected" />
   </Layout>
 </template>
 
