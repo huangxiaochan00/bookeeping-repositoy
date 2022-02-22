@@ -17,7 +17,8 @@
 
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
-import tagListModel from "@/models/tagListModel.ts";
+// import tagListModel from "@/models/tagListModel.ts";
+import store from "@/store/index2";
 import Vue from "vue";
 @Component
 export default class Tag extends Vue {
@@ -29,7 +30,7 @@ export default class Tag extends Vue {
     this.$emit("update:selected", this.selectedTag);
   }
   create() {
-    window.createTag();
+    store.createTag();
   }
 }
 </script>

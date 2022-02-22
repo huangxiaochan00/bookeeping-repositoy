@@ -19,8 +19,8 @@ import NumberPad from "@/components/NumberPad.vue";
 import Note from "@/components/Note.vue";
 import Type from "@/components/Type.vue";
 import recordListModel from "@/models/recordListModel.ts";
-import tagListModel from "../models/tagListModel";
-
+// import tagListModel from "../models/tagListModel";
+import store from "@/store/index2";
 @Component({
   components: {
     Tag,
@@ -30,7 +30,7 @@ import tagListModel from "../models/tagListModel";
   },
 })
 export default class Money extends Vue {
-  tags = window.tagList;
+  tags = store.tagList;
   // console.log(tags);
 
   record: RecordItem = {
@@ -42,8 +42,6 @@ export default class Money extends Vue {
   recordList: RecordItem[] = recordListModel.fetch();
 
   onUpdateSelected(tag: string) {
-    // console.log(tag);
-
     this.record.tag = tag;
   }
 

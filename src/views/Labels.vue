@@ -20,20 +20,19 @@
 
 <script lang="ts">
 import Vue from "vue";
-//import Nav from "@/components/Nav.vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
-import tagListModel from "@/models/tagListModel.ts";
 import Button from "@/components/Button.vue";
-// tagListModel.fetch();
+import store from "@/store/index2";
+
 @Component({
   components: {
     Button,
   },
 })
 export default class Label extends Vue {
-  tags = window.tagList;
+  tags = store.tagList;
   createTag() {
-    window.createTag();
+    store.createTag();
   }
 }
 </script>

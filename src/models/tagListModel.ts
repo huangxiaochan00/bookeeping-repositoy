@@ -1,3 +1,4 @@
+import store from '@/store/index2';
 import createID from '../lib/createID';
 
 const tagListModel: TagListModel = {
@@ -19,7 +20,7 @@ const tagListModel: TagListModel = {
         return name
     },
     save() {
-        window.localStorage.setItem("tagList", JSON.stringify(window.tagList));
+        window.localStorage.setItem("tagList", JSON.stringify(store.tagList));
     },
     update(id, name) {
         // console.log('d');
@@ -32,7 +33,7 @@ const tagListModel: TagListModel = {
                 return '标签名重复了'
             }
             else {
-                const tag = window.findTag(id)
+                const tag = store.findTag(id)
                 tag.name = name
                 this.save()
                 // console.log('success');

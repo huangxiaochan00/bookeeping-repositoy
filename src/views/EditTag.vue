@@ -23,13 +23,10 @@
 
 <script lang="ts">
 import Vue from "vue";
-
-//import Nav from "@/components/Nav.vue";
 import Note from "@/components/Note.vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
-import tagListModel from "@/models/tagListModel.ts";
 import Button from "@/components/Button.vue";
-
+import store from "@/store/index2";
 @Component({
   components: {
     Note,
@@ -37,21 +34,16 @@ import Button from "@/components/Button.vue";
   },
 })
 export default class EditTag extends Vue {
-  tag = window.findTag(this.$route.params.id);
+  tag = store.findTag(this.$route.params.id);
   created() {
-    // const id = this.$route.params.id;
-    // tagListModel.fetch();
-    // const tags = tagListModel.data;
-    this.tag = window.findTag(this.$route.params.id);
-    // console.log(tag);
-
+    this.tag = store.findTag(this.$route.params.id);
     if (!this.tag) {
       this.$router.replace("/404");
     }
   }
   remove() {
     if (this.tag) {
-      if (tagListModel.remove(this.tag.id)) {
+      if (store.removeTag(this.tag.id)) {
         alert("删除成功！");
         this.$router.back();
       }
@@ -65,10 +57,10 @@ export default class EditTag extends Vue {
     this.$router.back();
   }
   updateTag(name: string) {
-    console.log(name);
+    // console.log(name);
 
     if (this.tag) {
-      window.updateTag(this.tag.id, name);
+      store.updateTag(this.tag.id, name);
     }
   }
 }
