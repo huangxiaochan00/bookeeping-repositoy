@@ -19,7 +19,7 @@ const tagListModel: TagListModel = {
         return name
     },
     save() {
-        window.localStorage.setItem("tagList", JSON.stringify(this.data));
+        window.localStorage.setItem("tagList", JSON.stringify(window.tagList));
     },
     update(id, name) {
         // console.log('d');
@@ -28,13 +28,15 @@ const tagListModel: TagListModel = {
         if (idList.indexOf(id) >= 0) {
             const names = this.data.map(t => t.name)
             if (names.indexOf(name) > 0) {
-                alert("标签名重复了")
+                // alert("标签名重复了")
                 return '标签名重复了'
             }
             else {
-                const tag = this.data.filter(t => t.id === id)[0]
+                const tag = window.findTag(id)
                 tag.name = name
                 this.save()
+                // console.log('success');
+
                 return 'success'
             }
         }
@@ -55,7 +57,7 @@ const tagListModel: TagListModel = {
         }
         this.data.splice(index, 1)
         this.save()
-        return 'success'
+        return true
     }
 
 }

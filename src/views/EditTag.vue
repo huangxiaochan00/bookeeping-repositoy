@@ -37,18 +37,16 @@ import Button from "@/components/Button.vue";
   },
 })
 export default class EditTag extends Vue {
-  tag?: { id: string; name: string } = undefined;
+  tag = window.findTag(this.$route.params.id);
   created() {
-    const id = this.$route.params.id;
-    tagListModel.fetch();
-    const tags = tagListModel.data;
-    const tag = tags.filter((t) => t.id === id)[0];
+    // const id = this.$route.params.id;
+    // tagListModel.fetch();
+    // const tags = tagListModel.data;
+    this.tag = window.findTag(this.$route.params.id);
     // console.log(tag);
 
-    if (!tag) {
+    if (!this.tag) {
       this.$router.replace("/404");
-    } else {
-      this.tag = tag;
     }
   }
   remove() {
@@ -67,8 +65,10 @@ export default class EditTag extends Vue {
     this.$router.back();
   }
   updateTag(name: string) {
+    console.log(name);
+
     if (this.tag) {
-      tagListModel.update(this.tag.id, name);
+      window.updateTag(this.tag.id, name);
     }
   }
 }

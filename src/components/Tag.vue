@@ -29,14 +29,7 @@ export default class Tag extends Vue {
     this.$emit("update:selected", this.selectedTag);
   }
   create() {
-    const name = window.prompt("输出标签名");
-    if (name === "") {
-      window.alert("标签名不能为空");
-      return;
-    } else if (this.dataSource) {
-      tagListModel.create(name);
-      // this.$emit("update:dataSource", [...this.dataSource, name]);
-    }
+    window.createTag();
   }
 }
 </script>

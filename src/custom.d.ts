@@ -7,19 +7,24 @@ type RecordItem = {
     createAt?: Date;
 };
 
-type tag = {
+type Tag = {
     id: string
     name: string
 }
 
 type TagListModel = {
-    data: tag[]
-    fetch: () => tag[]
+    data: Tag[]
+    fetch: () => Tag[]
     create: (name: string) => string
     save: () => void
     update: (id: string, name: string) => string
-    remove: (id: string) => string
+    remove: (id: string) => boolean
 }
 interface Window {
-    tagList: Tag[]
+    tagList: Tag[];
+    createTag: () => void;
+    updateTag: (id: string, name: string) => string;
+    removeTag: (id: string) => boolean;
+    findTag: (id: string) => Tag | undefined
+
 }

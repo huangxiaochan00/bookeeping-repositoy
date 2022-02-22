@@ -15,6 +15,25 @@ Vue.component('Layout', Layout)
 Vue.component('Icon', Icon)
 
 window.tagList = tagListModel.fetch();
+window.findTag = (id) => {
+  return window.tagList.filter(t => t.id === id)[0]
+}
+window.createTag = () => {
+  const name = window.prompt("输出标签名");
+  if (!name) {
+    window.alert("标签名不能为空");
+    return;
+  } else {
+    tagListModel.create(name);
+  }
+}
+window.updateTag = (id, name) => {
+  return tagListModel.update(id, name)
+}
+window.removeTag = (id) => {
+  return tagListModel.remove(id)
+}
+
 
 new Vue({
   router,

@@ -33,13 +33,7 @@ import Button from "@/components/Button.vue";
 export default class Label extends Vue {
   tags = window.tagList;
   createTag() {
-    const name = window.prompt("输出标签名");
-    if (!name) {
-      window.alert("标签名不能为空");
-      return;
-    } else {
-      tagListModel.create(name);
-    }
+    window.createTag();
   }
 }
 </script>
