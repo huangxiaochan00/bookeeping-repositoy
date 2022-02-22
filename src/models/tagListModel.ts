@@ -36,8 +36,6 @@ const tagListModel: TagListModel = {
                 const tag = store.findTag(id)
                 tag.name = name
                 this.save()
-                // console.log('success');
-
                 return 'success'
             }
         }

@@ -12,7 +12,7 @@
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Watch } from "vue-property-decorator";
+import { Component, Watch } from "vue-property-decorator";
 import Vue from "vue";
 import Tag from "@/components/Tag.vue";
 import NumberPad from "@/components/NumberPad.vue";
@@ -31,25 +31,22 @@ import store from "@/store/index2";
 })
 export default class Money extends Vue {
   tags = store.tagList;
-  // console.log(tags);
-
   record: RecordItem = {
     tag: this.tags[0].id,
     note: "",
     type: "-",
     amount: 0,
   };
-  recordList: RecordItem[] = recordListModel.fetch();
-
+  // recordList: RecordItem[] = recordListModel.fetch();
+  recordList = store.recordList;
   onUpdateSelected(tag: string) {
     this.record.tag = tag;
   }
-
   onUpdateNote(note: string) {
     this.record.note = note;
   }
   saveRecord() {
-    recordListModel.create(this.record);
+    store.createRecord(this.record);
   }
   @Watch("recordList")
   onRecordChange() {

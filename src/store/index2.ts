@@ -3,7 +3,11 @@ import tagListModel from "@/models/tagListModel";
 
 const store = {
     recordList: recordListModel.fetch(),
-    createRecord: (record: RecordItem) => recordListModel.create(record),
+    createRecord: (record: RecordItem) => {
+        console.log('df');
+
+        return recordListModel.create(record)
+    },
     tagList: tagListModel.fetch(),
     findTag(id: string) {
         return this.tagList.filter(t => t.id === id)[0]
