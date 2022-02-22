@@ -31,6 +31,8 @@ import tagListModel from "../models/tagListModel";
 })
 export default class Money extends Vue {
   tags = tagListModel.fetch();
+  // console.log(tags);
+
   record: RecordItem = {
     tag: this.tags[0].id,
     note: "",
@@ -40,6 +42,8 @@ export default class Money extends Vue {
   recordList: RecordItem[] = recordListModel.fetch();
 
   onUpdateSelected(tag: string) {
+    // console.log(tag);
+
     this.record.tag = tag;
   }
 

@@ -2,7 +2,7 @@
   <div class="tag">
     <ol>
       <li
-        :class="selectedTag == tag ? 'selected' : ''"
+        :class="selectedTag == tag.id ? 'selected' : ''"
         v-for="tag in dataSource"
         :key="tag.id"
         @click="selected(tag)"
@@ -21,9 +21,9 @@ import Vue from "vue";
 @Component
 export default class Tag extends Vue {
   @Prop() dataSource: string[] | undefined;
-  selectedTag = "衣";
+  selectedTag = "1";
   selected(tag: string) {
-    this.selectedTag = tag;
+    this.selectedTag = tag.id;
     // console.log(this.selectedTag);
     this.$emit("update:selected", this.selectedTag);
   }
