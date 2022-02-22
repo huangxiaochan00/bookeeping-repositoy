@@ -30,7 +30,7 @@ import tagListModel from "../models/tagListModel";
   },
 })
 export default class Money extends Vue {
-  tags = tagListModel.fetch();
+  tags = window.tagList;
   // console.log(tags);
 
   record: RecordItem = {

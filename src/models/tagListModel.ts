@@ -1,17 +1,4 @@
 import createID from '../lib/createID';
-type tag = {
-    id: string
-    name: string
-}
-
-type TagListModel = {
-    data: tag[]
-    fetch: () => tag[]
-    create: (name: string) => string
-    save: () => void
-    update: (id: string, name: string) => string
-    remove: (id: string) => string
-}
 
 const tagListModel: TagListModel = {
     data: [],
