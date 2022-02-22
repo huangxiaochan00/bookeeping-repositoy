@@ -34,7 +34,7 @@ export default class Label extends Vue {
   tags = tagListModel.data;
   createTag() {
     const name = window.prompt("输出标签名");
-    if (name === "") {
+    if (!name) {
       window.alert("标签名不能为空");
       return;
     } else {

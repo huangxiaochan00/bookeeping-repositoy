@@ -1,3 +1,4 @@
+import createID from '../lib/createID';
 type tag = {
     id: string
     name: string
@@ -15,7 +16,7 @@ type TagListModel = {
 const tagListModel: TagListModel = {
     data: [],
     fetch() {
-        return JSON.parse(
+        return this.data = JSON.parse(
             window.localStorage.getItem("tagList") || "[]")
     },
     create(name: string) {
@@ -24,7 +25,8 @@ const tagListModel: TagListModel = {
             alert("该标签已存在，不可重复创建！")
             return name
         }
-        this.data.push({ id: name, name: name })
+        const id = createID().toString()
+        this.data.push({ id, name: name })
         this.save()
         alert("创建成功！")
         return name

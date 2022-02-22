@@ -32,7 +32,7 @@ import tagListModel from "../models/tagListModel";
 export default class Money extends Vue {
   tags = tagListModel.fetch();
   record: RecordItem = {
-    tag: this.tags[0],
+    tag: this.tags[0].id,
     note: "",
     type: "-",
     amount: 0,
