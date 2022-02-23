@@ -32,7 +32,7 @@ import store from "@/store/index2";
 export default class Money extends Vue {
   tags = store.tagList;
   record: RecordItem = {
-    tag: this.tags[0].id,
+    tag: this.tags[0].name,
     note: "",
     type: "-",
     amount: 0,
