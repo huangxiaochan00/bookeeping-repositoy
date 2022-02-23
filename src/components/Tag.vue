@@ -3,7 +3,7 @@
     <ol>
       <li
         :class="selectedTag == tag.name ? 'selected' : ''"
-        v-for="tag in dataSource"
+        v-for="tag in tagList"
         :key="tag.id"
         @click="selected(tag.name)"
       >
@@ -22,7 +22,10 @@ import store from "@/store/index2";
 import Vue from "vue";
 @Component
 export default class Tag extends Vue {
-  @Prop() dataSource: string[] | undefined;
+  // @Prop() dataSource: string[] | undefined;
+  tagList = store.tagList;
+  // console.log(tagList);
+
   selectedTag = "1";
   selected(tag: string) {
     this.selectedTag = tag;

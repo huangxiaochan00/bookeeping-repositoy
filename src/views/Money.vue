@@ -8,7 +8,8 @@
       @update:note="onUpdateNote"
       :value="record.note"
     />
-    <Tag :dataSource="tags" @update:selected="onUpdateSelected" />
+    <Tag @update:selected="onUpdateSelected" />
+    <!-- <Tag /> -->
   </Layout>
 </template>
 
@@ -31,10 +32,10 @@ import store from "@/store/index2";
   },
 })
 export default class Money extends Vue {
-  tags = store.tagList;
+  // tags = store.tagList;
   recordList = store.recordList;
   record: RecordItem = {
-    tag: this.tags[0].name,
+    tag: "",
     note: "",
     type: "-",
     amount: 0,
