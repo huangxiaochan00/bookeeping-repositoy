@@ -20,6 +20,7 @@ import Tag from "@/components/Tag.vue";
 import NumberPad from "@/components/NumberPad.vue";
 import Note from "@/components/Note.vue";
 import Tab from "@/components/Tab.vue";
+import typeList from "../constants/typeList";
 @Component({
   components: {
     Tag,
@@ -35,10 +36,7 @@ export default class Money extends Vue {
     type: "-",
     amount: 0,
   };
-  typeList = [
-    { text: "支出", value: "-" },
-    { text: "收入", value: "+" },
-  ];
+  typeList = typeList;
   get recordList() {
     return this.$store.state.recordList;
   }

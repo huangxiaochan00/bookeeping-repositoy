@@ -11,6 +11,8 @@
 import { Component, Watch } from "vue-property-decorator";
 import Vue from "vue";
 import Tab from "@/components/Tab.vue";
+import intervalList from '../constants/intervalList';
+import typeList from '../constants/typeList';
 @Component({
   components: {
     Tab,
@@ -22,15 +24,8 @@ export default class Statistics extends Vue {
   // zzz = "type-tabs";
   type = "-";
   interval = "day";
-  intervalList = [
-    { text: "按日", value: "day" },
-    { text: "按月", value: "month" },
-    { text: "按年", value: "year" },
-  ];
-  typeList = [
-    { text: "支出", value: "-" },
-    { text: "收入", value: "+" },
-  ];
+  intervalList =intervalList;
+  typeList =typeList;
 }
 </script>
 
