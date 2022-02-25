@@ -2,7 +2,7 @@
   <Layout>
     <router-link
       class="tag"
-      v-for="tag in tags"
+      v-for="tag in tagList"
       :key="tag.id"
       :to="`/labels/edit/${tag.id}`"
     >
@@ -27,17 +27,15 @@ import Button from "@/components/Button.vue";
 @Component({
   components: {
     Button,
-  },
-  computed: {
-    tagList() {
-      return this.$store.state.tagList;
-    },
-  },
+  }
 })
 export default class Label extends Vue {
-  // tags = store.tagList;
+  get tagList() {
+      return this.$store.state.tagList;
+    }
   createTag() {
-    // store.createTag();
+    
+    this.$store.commit("createTag");
   }
 }
 </script>

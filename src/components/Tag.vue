@@ -10,7 +10,7 @@
         {{ tag.name }}
       </li>
 
-      <li @click="create">添加</li>
+      <li @click="createTag">添加</li>
     </ol>
   </div>
 </template>
@@ -20,19 +20,16 @@ import { Component, Prop } from "vue-property-decorator";
 // import tagListModel from "@/models/tagListModel.ts";
 // import store from "@/store/index2";
 import Vue from "vue";
-@Component({
-  computed: {
-    tagList() {
-      return this.$store.state.tagList;
-    },
-  },
-})
+@Component
 export default class Tag extends Vue {
   // @Prop() dataSource: string[] | undefined;
   // tagList = store.tagList;
   // console.log(tagList);
   // tagList = [];
   selectedTag = "1";
+  get tagList(){
+    return this.$store.state.tagList;
+  }
   selected(tag: string) {
     this.selectedTag = tag;
     // console.log(this.selectedTag);
@@ -42,7 +39,7 @@ export default class Tag extends Vue {
     // store.createTag();
     this.$store.commit("fetchTag");
   }
-  create() {
+  createTag() {
     this.$store.commit("createTag");
   }
 }

@@ -8,7 +8,7 @@
       </div>
       <div class="form">
         <Note
-          :value="tag.name"
+          :value="currentTag.name"
           file-name="标签名"
           placeholder="在这里修改标签名"
           @update:note="updateTag"
@@ -34,24 +34,26 @@ import Button from "@/components/Button.vue";
   },
 })
 export default class EditTag extends Vue {
-  // tag = store.findTag(this.$route.params.id);
-  tag?: Tag = undefined;
+  get currentTag() {
+    return this.$store.state.currentTag;
+  }
   created() {
-    //   this.tag = store.findTag(this.$route.params.id);
-    if (!this.tag) {
+    this.$store.commit("findTag", this.$route.params.id);
+    if (!currentTag) {
       this.$router.replace("/404");
     }
   }
+
   remove() {
-    if (this.tag) {
-      //   if (store.removeTag(this.tag.id)) {
-      //     alert("删除成功！");
-      this.$router.back();
+    if (currentTag) {
+      if (this.$store.commit("removeTag", currentTag.id)) {
+        alert("删除成功！");
+        this.$router.back();
+      }
     }
-    // }
   }
   goBack() {
-    if (!this.tag.name) {
+    if (!currentTag.name) {
       alert("标签名不能为空");
       return;
     }
