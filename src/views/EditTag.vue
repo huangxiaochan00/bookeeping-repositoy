@@ -26,7 +26,7 @@ import Vue from "vue";
 import Note from "@/components/Note.vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import Button from "@/components/Button.vue";
-import store from "@/store/index2";
+// import store from "@/store/index2";
 @Component({
   components: {
     Note,
@@ -34,20 +34,21 @@ import store from "@/store/index2";
   },
 })
 export default class EditTag extends Vue {
-  tag = store.findTag(this.$route.params.id);
+  // tag = store.findTag(this.$route.params.id);
+  tag?: Tag = undefined;
   created() {
-    this.tag = store.findTag(this.$route.params.id);
+    //   this.tag = store.findTag(this.$route.params.id);
     if (!this.tag) {
       this.$router.replace("/404");
     }
   }
   remove() {
     if (this.tag) {
-      if (store.removeTag(this.tag.id)) {
-        alert("删除成功！");
-        this.$router.back();
-      }
+      //   if (store.removeTag(this.tag.id)) {
+      //     alert("删除成功！");
+      this.$router.back();
     }
+    // }
   }
   goBack() {
     if (!this.tag.name) {
@@ -57,11 +58,10 @@ export default class EditTag extends Vue {
     this.$router.back();
   }
   updateTag(name: string) {
-    // console.log(name);
-
-    if (this.tag) {
-      store.updateTag(this.tag.id, name);
-    }
+    console.log(name);
+    // if (this.tag) {
+    //   store.updateTag(this.tag.id, name);
+    // }
   }
 }
 </script>

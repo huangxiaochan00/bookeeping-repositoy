@@ -22,17 +22,22 @@
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import Button from "@/components/Button.vue";
-import store from "@/store/index2";
+// import store from "@/store/index2";
 
 @Component({
   components: {
     Button,
   },
+  computed: {
+    tagList() {
+      return this.$store.state.tagList;
+    },
+  },
 })
 export default class Label extends Vue {
-  tags = store.tagList;
+  // tags = store.tagList;
   createTag() {
-    store.createTag();
+    // store.createTag();
   }
 }
 </script>

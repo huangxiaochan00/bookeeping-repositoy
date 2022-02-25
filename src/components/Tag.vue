@@ -18,22 +18,32 @@
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
 // import tagListModel from "@/models/tagListModel.ts";
-import store from "@/store/index2";
+// import store from "@/store/index2";
 import Vue from "vue";
-@Component
+@Component({
+  computed: {
+    tagList() {
+      return this.$store.state.tagList;
+    },
+  },
+})
 export default class Tag extends Vue {
   // @Prop() dataSource: string[] | undefined;
-  tagList = store.tagList;
+  // tagList = store.tagList;
   // console.log(tagList);
-
+  // tagList = [];
   selectedTag = "1";
   selected(tag: string) {
     this.selectedTag = tag;
     // console.log(this.selectedTag);
     this.$emit("update:selected", this.selectedTag);
   }
+  created() {
+    // store.createTag();
+    this.$store.commit("fetchTag");
+  }
   create() {
-    store.createTag();
+    this.$store.commit("createTag");
   }
 }
 </script>

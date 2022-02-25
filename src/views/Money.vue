@@ -22,7 +22,7 @@ import Note from "@/components/Note.vue";
 import Type from "@/components/Type.vue";
 // import recordListModel from "@/models/recordListModel.ts";
 // import tagListModel from "../models/tagListModel";
-import store from "@/store/index2";
+// import store from "@/store/index2";
 @Component({
   components: {
     Tag,
@@ -30,10 +30,15 @@ import store from "@/store/index2";
     Note,
     Type,
   },
+  computed: {
+    recordList() {
+      return this.$store.state.recordList;
+    },
+  },
 })
 export default class Money extends Vue {
   // tags = store.tagList;
-  recordList = store.recordList;
+  // recordList = store.recordList;
   record: RecordItem = {
     tag: "",
     note: "",
@@ -41,7 +46,9 @@ export default class Money extends Vue {
     amount: 0,
   };
   // recordList: RecordItem[] = recordListModel.fetch();
-
+  created() {
+    this.$store.commit("fetchRecords");
+  }
   onUpdateSelected(tag: string) {
     this.record.tag = tag;
   }
@@ -49,7 +56,7 @@ export default class Money extends Vue {
     this.record.note = note;
   }
   saveRecord() {
-    store.createRecord(this.record);
+    this.$store.commit("createRecord", this.record);
     this.record.type = "-";
     this.record.note = "";
     this.record.amount = 0;
