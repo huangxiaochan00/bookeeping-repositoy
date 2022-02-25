@@ -15,7 +15,7 @@
         />
       </div>
       <div class="button-wrapper">
-        <Button @click="remove">删除标签</Button>
+        <Button @click="removeTag">删除标签</Button>
       </div>
     </Layout>
   </div>
@@ -39,31 +39,32 @@ export default class EditTag extends Vue {
   }
   created() {
     this.$store.commit("findTag", this.$route.params.id);
-    if (!currentTag) {
+    if (!this.currentTag) {
       this.$router.replace("/404");
     }
   }
 
-  remove() {
-    if (currentTag) {
-      if (this.$store.commit("removeTag", currentTag.id)) {
-        alert("删除成功！");
-        this.$router.back();
-      }
+  removeTag() {
+    // console.log("d");
+
+    if (this.currentTag) {
+      this.$store.commit("removeTag", this.currentTag.id);
+      alert("删除成功！");
+      this.$router.back();
     }
   }
   goBack() {
-    if (!currentTag.name) {
+    if (!this.currentTag.name) {
       alert("标签名不能为空");
       return;
     }
     this.$router.back();
   }
   updateTag(name: string) {
-    console.log(name);
-    // if (this.tag) {
-    //   store.updateTag(this.tag.id, name);
-    // }
+    //   // console.log(name);
+    if (this.currentTag) {
+      this.$store.commit("updateTag", { id: this.currentTag.id, name });
+    }
   }
 }
 </script>

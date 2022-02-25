@@ -40,10 +40,6 @@ const store = new Vuex.Store({
     },
     findTag(state, id: string) {
       state.currentTag = state.tagList.filter(t => t.id === id)[0]
-      console.log(state.currentTag);
-      console.log('ddd');
-
-
     },
     createTag(state) {
       const name = window.prompt("输出标签名");
@@ -64,30 +60,29 @@ const store = new Vuex.Store({
 
       }
     },
-    // updateTag(state, { id: string, name: string }) {
-    //   const idList = state.tagList.map(t => t.id)
-    //   if (idList.indexOf(id) >= 0) {
-    //     const names = this.tagList.map(t => t.name)
-    //     if (names.indexOf(name) > 0) {
-    //       // alert("标签名重复了")
-    //       return '标签名重复了'
-    //     }
-    //     else {
-    //       const tag = tagStore.findTag(id)
-    //       tag.name = name
-    //       tagStore.saveTag()
-    //       return 'success'
+    updateTag(state, object: { id: string, name: string }) {
+      const { id, name } = object
+      const idList = state.tagList.map(t => t.id)
+      if (idList.indexOf(id) >= 0) {
+        const names = state.tagList.map(t => t.name)
+        if (names.indexOf(name) >= 0) {
+          alert("标签名重复了")
+        }
+        else {
+          const tag = state.tagList.filter(t => t.id === id)[0]
+          tag.name = name
+          store.commit('saveTag')
+          return 'success'
 
-    //     }
-    //   }
-    //   else {
-    //     return 'not found'
-    //   }
-    // },
+        }
+      }
+      else {
+        alert('没有找到！')
+      }
+    },
     removeTag(state, id: string) {
       let index = -1
-
-      for (let i = 0; i < this.tagList.length; i++) {
+      for (let i = 0; i < state.tagList.length; i++) {
         if (state.tagList[i].id === id) {
           index = i;
           break

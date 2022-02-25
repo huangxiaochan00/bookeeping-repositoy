@@ -27,14 +27,14 @@ import Button from "@/components/Button.vue";
 @Component({
   components: {
     Button,
-  }
+  },
 })
 export default class Label extends Vue {
   get tagList() {
-      return this.$store.state.tagList;
-    }
+    this.$store.commit("fetchTag");
+    return this.$store.state.tagList;
+  }
   createTag() {
-    
     this.$store.commit("createTag");
   }
 }

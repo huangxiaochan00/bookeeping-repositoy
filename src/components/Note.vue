@@ -22,7 +22,7 @@ export default class Note extends Vue {
   @Prop({ require: true }) fileName!: string;
   @Prop() placeholder?: string;
 
-  @Watch("value")
+  // @Watch("value")
   onChangeValue(value: string) {
     this.$emit("update:note", value);
   }
