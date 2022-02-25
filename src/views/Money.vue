@@ -1,7 +1,7 @@
 <template>
   <Layout class-prefix="money">
     <NumberPad :amount.sync="record.amount" @submit="saveRecord" />
-    <Type :type.sync="record.type" />
+    <Tab :value.sync="record.type" :dataSource="typeList" />
     <Note
       file-name="备注"
       placeholder="在这里添加备注"
@@ -19,26 +19,29 @@ import Vue from "vue";
 import Tag from "@/components/Tag.vue";
 import NumberPad from "@/components/NumberPad.vue";
 import Note from "@/components/Note.vue";
-import Type from "@/components/Type.vue";
+import Tab from "@/components/Tab.vue";
 @Component({
   components: {
     Tag,
     NumberPad,
     Note,
-    Type,
-  }
+    Tab,
+  },
 })
 export default class Money extends Vue {
- 
   record: RecordItem = {
     tag: "",
     note: "",
     type: "-",
     amount: 0,
   };
+  typeList = [
+    { text: "支出", value: "-" },
+    { text: "收入", value: "+" },
+  ];
   get recordList() {
-      return this.$store.state.recordList;
-    }
+    return this.$store.state.recordList;
+  }
   created() {
     this.$store.commit("fetchRecords");
   }
