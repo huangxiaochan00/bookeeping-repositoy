@@ -5,11 +5,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-type MyState = {
-  recordList: RecordItem[],
-  tagList: Tag[],
-  currentTag?: Tag
-}
+
 const store = new Vuex.Store({
   state: {
     recordList: [],

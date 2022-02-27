@@ -6,7 +6,11 @@ type RecordItem = {
     amount: number;
     createAt?: string;
 };
-
+type MyState = {
+    recordList: RecordItem[],
+    tagList: Tag[],
+    currentTag?: Tag
+}
 type Tag = {
     id: string
     name: string
