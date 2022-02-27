@@ -6,7 +6,7 @@
         :key="item.value"
         :class="{
           selected: value === item.value,
-          [classPrefix + 'tabs-item']: classPrefix,
+          [classPrefix + '-tabs-item']: classPrefix,
         }"
         @click="select(item)"
       >

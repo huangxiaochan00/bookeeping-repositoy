@@ -9,7 +9,7 @@ const recordStore = {
     },
     createRecord(record: RecordItem) {
         const record2 = clone(record);
-        record2.createAt = new Date();
+        record2.createAt = new Date().toISOString();
         this.recordList.push(record2);
         recordStore.saveRecords(this.recordList);
     },

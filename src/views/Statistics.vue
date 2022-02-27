@@ -1,8 +1,12 @@
 <template>
   <div>
     <Layout>
-      <Tab :value.sync="type" :dataSource="typeList" class-prefix="type-tabs" />
-      <Tab :value.sync="interval" :dataSource="intervalList" />
+      <Tab :value.sync="type" :dataSource="typeList" class-prefix="type" />
+      <Tab
+        :value.sync="interval"
+        :dataSource="intervalList"
+        class-prefix="interval"
+      />
     </Layout>
   </div>
 </template>
@@ -11,8 +15,8 @@
 import { Component, Watch } from "vue-property-decorator";
 import Vue from "vue";
 import Tab from "@/components/Tab.vue";
-import intervalList from '../constants/intervalList';
-import typeList from '../constants/typeList';
+import intervalList from "../constants/intervalList";
+import typeList from "../constants/typeList";
 @Component({
   components: {
     Tab,
@@ -24,8 +28,8 @@ export default class Statistics extends Vue {
   // zzz = "type-tabs";
   type = "-";
   interval = "day";
-  intervalList =intervalList;
-  typeList =typeList;
+  intervalList = intervalList;
+  typeList = typeList;
 }
 </script>
 
@@ -39,5 +43,19 @@ export default class Statistics extends Vue {
       display: none;
     }
   }
+}
+::v-deep .interval-tabs-item {
+  height: 32px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px red solid;
+  padding-top: 0;
+  // &.selected {
+  //   background: #c4c4c4;
+  //   // border: 1px red solid;
+  //   &::after {
+  //     display: none;
+  //   }
+  // }
 }
 </style>
