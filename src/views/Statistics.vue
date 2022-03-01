@@ -4,7 +4,9 @@
       <Tab :value.sync="type" :dataSource="typeList" class-prefix="type" />
       <ol>
         <li v-for="(group, index) in groupList" :key="index">
-          <h3 class="title">{{ beautify(group.title) }}</h3>
+          <h3 class="title">
+            {{ beautify(group.title) }}<span>￥{{ group.total }}</span>
+          </h3>
 
           <ol>
             <li v-for="item in group.items" :key="item.id" class="record">
@@ -26,7 +28,6 @@ import Tab from "@/components/Tab.vue";
 import typeList from "../constants/typeList";
 import dayjs from "dayjs";
 import clone from "../lib/clone";
-// import clone
 @Component({
   components: {
     Tab,
@@ -55,18 +56,21 @@ export default class Statistics extends Vue {
     this.$store.commit("fetchRecords");
   }
   get groupList() {
-    type hashValue = { title: string; items: RecordItem[] };
+    type Result = { title: string; total?: number; items: RecordItem[] }[];
     const { recordList } = this;
     if (recordList.length === 0) {
       return [];
     }
-    const newList = clone(recordList).sort(
-      (a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf()
-    );
+    const newList = clone(recordList)
+      .filter((r) => r.type === this.type)
+      .sort(
+        (a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf()
+      );
     const result = [
       {
         title: dayjs(newList[0].createAt).format("YYYY-MM-DD"),
         items: [newList[0]],
+        total: newList[0].amount,
       },
     ];
     for (let i = 1; i < newList.length; i++) {
@@ -74,10 +78,12 @@ export default class Statistics extends Vue {
       const last = result[result.length - 1];
       if (dayjs(last.title).isSame(dayjs(current.createAt), "day")) {
         last.items.push(current);
+        last.total += current.amount;
       } else {
         result.push({
           title: dayjs(current.createAt).format("YYYY-MM-DD"),
           items: [current],
+          total: current.amount,
         });
       }
     }

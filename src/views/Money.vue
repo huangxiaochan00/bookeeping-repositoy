@@ -1,12 +1,7 @@
 <template>
   <Layout class-prefix="money">
     <NumberPad :amount.sync="record.amount" @submit="saveRecord" />
-    <!-- <Tab
-      :value.sync="record.type"
-      :dataSource="typeList"
-      class-prefix="money"
-    /> -->
-    <Tab :value.sync="record.type" :dataSource="typeList" class-prefix="type" />
+    <Tab :value.sync="record.type" :dataSource="typeList" />
     <Note
       file-name="备注"
       placeholder="在这里添加备注"
@@ -58,7 +53,7 @@ export default class Money extends Vue {
     this.$store.commit("createRecord", this.record);
     this.record.type = "-";
     this.record.note = "";
-    this.record.amount = 0;
+    // this.record.amount = 0;
   }
   // onUpdateAmount() {
   //   this.record.amount = 0;
@@ -73,7 +68,6 @@ export default class Money extends Vue {
 
 <style lang='scss'>
 .money-content {
-  border: 1px green solid;
   display: flex;
   flex-direction: column-reverse;
 }
@@ -81,9 +75,4 @@ export default class Money extends Vue {
   padding: 4px;
   align-items: center;
 }
-// ::v-deep .type-tabs-item {
-//   // border: 1px red solid;
-//   padding: 8px 0;
-//   border: 1px red solid;
-// }
 </style>

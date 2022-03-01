@@ -51,7 +51,6 @@ export default class Type extends Vue {
       content: "";
       display: block;
       height: 3px;
-      // background: #333;
       position: absolute;
       bottom: 0;
       width: 100%;
