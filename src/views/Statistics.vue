@@ -2,15 +2,9 @@
   <div>
     <Layout>
       <Tab :value.sync="type" :dataSource="typeList" class-prefix="type" />
-      <Tab
-        :value.sync="interval"
-        :dataSource="intervalList"
-        class-prefix="interval"
-      />
-
       <ol>
-        <li v-for="(group, index) in result" :key="index">
-          <h3 class="title">{{ group.title }}</h3>
+        <li v-for="(group, index) in groupList" :key="index">
+          <h3 class="title">{{ beautify(group.title) }}</h3>
 
           <ol>
             <li v-for="item in group.items" :key="item.id" class="record">
@@ -29,8 +23,10 @@
 import { Component, Watch } from "vue-property-decorator";
 import Vue from "vue";
 import Tab from "@/components/Tab.vue";
-import intervalList from "../constants/intervalList";
 import typeList from "../constants/typeList";
+import dayjs from "dayjs";
+import clone from "../lib/clone";
+// import clone
 @Component({
   components: {
     Tab,
@@ -40,28 +36,55 @@ export default class Statistics extends Vue {
   get recordList() {
     return (this.$store.state as MyState).recordList;
   }
+  beautify(string: string) {
+    const day = dayjs(string);
+    const now = dayjs();
+    if (day.isSame(now, "day")) {
+      return "今天";
+    } else if (day.isSame(now.subtract(1, "day"), "day")) {
+      return "昨天";
+    } else if (day.isSame(now.subtract(2, "day"), "day")) {
+      return "前天";
+    } else if (day.isSame(now, "year")) {
+      return day.format("M月D日");
+    } else {
+      return day.format("YYY年M月D日");
+    }
+  }
   beforeCreate() {
     this.$store.commit("fetchRecords");
   }
-  get result() {
+  get groupList() {
     type hashValue = { title: string; items: RecordItem[] };
-    const hashTable: { [key: string]: hashValue } = {};
     const { recordList } = this;
-    for (let i = 0; i < recordList.length; i++) {
-      const [date, time] = recordList[i].createAt.split("T");
-      hashTable[date] = hashTable[date] || { title: date, items: [] };
-      hashTable[date].items.push(recordList[i]);
+    if (recordList.length === 0) {
+      return [];
     }
-    return hashTable;
-
-    // return hashTable;
-  }
-  get yyy() {
-    return "dfdf";
+    const newList = clone(recordList).sort(
+      (a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf()
+    );
+    const result = [
+      {
+        title: dayjs(newList[0].createAt).format("YYYY-MM-DD"),
+        items: [newList[0]],
+      },
+    ];
+    for (let i = 1; i < newList.length; i++) {
+      const current = newList[i];
+      const last = result[result.length - 1];
+      if (dayjs(last.title).isSame(dayjs(current.createAt), "day")) {
+        last.items.push(current);
+      } else {
+        result.push({
+          title: dayjs(current.createAt).format("YYYY-MM-DD"),
+          items: [current],
+        });
+      }
+    }
+    return result;
   }
   type = "-";
   interval = "day";
-  intervalList = intervalList;
   typeList = typeList;
 }
 </script>
@@ -87,28 +110,11 @@ export default class Statistics extends Vue {
   color: #999;
 }
 ::v-deep .type-tabs-item {
-  // border: 1px red solid;
-  // padding: 8px 0;
   &.selected {
     background: #c4c4c4;
-    // border: 1px red solid;
     &::after {
       display: none;
     }
   }
-}
-::v-deep .interval-tabs-item {
-  // height: 32px;
-  text-align: center;
-  // font-size: 16px;
-  // border: 1px red solid;
-  // padding-top: 4px;
-  // &.selected {
-  //   background: #c4c4c4;
-  //   // border: 1px red solid;
-  //   &::after {
-  //     display: none;
-  //   }
-  // }
 }
 </style>
