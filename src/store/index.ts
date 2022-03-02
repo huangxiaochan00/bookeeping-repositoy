@@ -4,13 +4,44 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
+const defaultTagOut: Tag[] = [
+  { id: createID().toString(), name: "消费", icon: "money", type: "-" },
+  { id: createID().toString(), name: "餐饮", icon: "food", type: "-" },
+  { id: createID().toString(), name: "购物", icon: "buy", type: "-" },
+  { id: createID().toString(), name: "住房", icon: "home", type: "-" },
+  { id: createID().toString(), name: "交通", icon: "go", type: "-" },
+  { id: createID().toString(), name: "工资", icon: "wage", type: "+" },
+  { id: createID().toString(), name: "借入", icon: "borrow", type: "+" },
+  { id: createID().toString(), name: "红包", icon: "redbag", type: "all" },
+  { id: createID().toString(), name: "其他", icon: "other", type: "all" },
+]
+const defaultTagList: Tag[] = [
+  { id: createID().toString(), name: "消费", icon: "money", type: "-" },
+  { id: createID().toString(), name: "餐饮", icon: "food", type: "-" },
+  { id: createID().toString(), name: "购物", icon: "buy", type: "-" },
+  { id: createID().toString(), name: "住房", icon: "home", type: "-" },
+  { id: createID().toString(), name: "交通", icon: "go", type: "-" },
+  { id: createID().toString(), name: "医疗", icon: "medical", type: "-" },
+  { id: createID().toString(), name: "娱乐", icon: "enjoy", type: "-" },
+  { id: createID().toString(), name: "借出", icon: "lend", type: "-" },
+  { id: createID().toString(), name: "水电", icon: "water", type: "-" },
+  { id: createID().toString(), name: "衣服", icon: "cloth", type: "-" },
+  { id: createID().toString(), name: "化妆", icon: "makeup", type: "-" },
+  { id: createID().toString(), name: "礼物", icon: "gift", type: "+" },
+  { id: createID().toString(), name: "奖金", icon: "price", type: "+" },
+  { id: createID().toString(), name: "理财", icon: "conduct", type: "+" },
+  { id: createID().toString(), name: "工资", icon: "wage", type: "+" },
+  { id: createID().toString(), name: "借入", icon: "borrow", type: "+" },
+  { id: createID().toString(), name: "红包", icon: "redbag", type: "all" },
+  { id: createID().toString(), name: "其他", icon: "other", type: "all" },
+]
 
 const store = new Vuex.Store({
   state: {
     recordList: [],
     tagList: [],
-    currentTag: undefined
+    currentTag: undefined,
+    defaultTags: defaultTagList
   } as MyState,
   mutations: {
     fetchRecords(state) {

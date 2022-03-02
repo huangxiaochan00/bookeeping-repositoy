@@ -7,6 +7,7 @@
         :key="tag.id"
         @click="selected(tag.name)"
       >
+        <Icon name="add" />
         {{ tag.name }}
       </li>
 
@@ -27,7 +28,7 @@ export default class Tag extends Vue {
   // console.log(tagList);
   // tagList = [];
   selectedTag = "1";
-  get tagList(){
+  get tagList() {
     return this.$store.state.tagList;
   }
   selected(tag: string) {
@@ -48,7 +49,6 @@ export default class Tag extends Vue {
 <style scoped lang="scss">
 .tag {
   width: 100%;
-
   background: #ffffff;
   flex-grow: 1;
   flex-wrap: wrap;

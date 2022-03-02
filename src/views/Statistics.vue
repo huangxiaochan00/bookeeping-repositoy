@@ -2,21 +2,24 @@
   <div>
     <Layout>
       <Tab :value.sync="type" :dataSource="typeList" class-prefix="type" />
-      <ol>
-        <li v-for="(group, index) in groupList" :key="index">
-          <h3 class="title">
-            {{ beautify(group.title) }}<span>￥{{ group.total }}</span>
-          </h3>
+      <div class="data" v-if="groupList.length > 0">
+        <ol>
+          <li v-for="(group, index) in groupList" :key="index">
+            <h3 class="title">
+              {{ beautify(group.title) }}<span>￥{{ group.total }}</span>
+            </h3>
 
-          <ol>
-            <li v-for="item in group.items" :key="item.id" class="record">
-              <span>{{ item.tag }}</span>
-              <span class="notes">{{ item.note }}</span>
-              <span>￥{{ item.amount }}</span>
-            </li>
-          </ol>
-        </li>
-      </ol>
+            <ol>
+              <li v-for="item in group.items" :key="item.id" class="record">
+                <span>{{ item.tag }}</span>
+                <span class="notes">{{ item.note }}</span>
+                <span>￥{{ item.amount }}</span>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <div class="nodata" v-else>目前还没有记账记录哟~</div>
     </Layout>
   </div>
 </template>
@@ -122,5 +125,9 @@ export default class Statistics extends Vue {
       display: none;
     }
   }
+}
+.nodata {
+  padding: 40px;
+  text-align: center;
 }
 </style>

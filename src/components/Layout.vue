@@ -19,6 +19,9 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  max-width: 50vw;
+  margin: 0 auto;
+  // justify-content: center;
   background: rgb(244, 246, 245);
 }
 .content {

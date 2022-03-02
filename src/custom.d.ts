@@ -12,8 +12,10 @@ type MyState = {
     currentTag?: Tag
 }
 type Tag = {
-    id: string
-    name: string
+    id: string,
+    name: string,
+    icon?: "other" | string,
+    type?: string
 }
 
 type TagListModel = {
