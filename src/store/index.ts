@@ -41,6 +41,7 @@ const store = new Vuex.Store({
     recordList: [],
     tagList: [],
     currentTag: undefined,
+    currentType: '-',
     defaultTags: defaultTagList
   } as MyState,
   mutations: {
@@ -51,16 +52,17 @@ const store = new Vuex.Store({
     fetchTag(state) {
       state.tagList = JSON.parse(
         window.localStorage.getItem("tagList") || "[]")
-      // console.log(state.tagList);
-      // console.log('dd');
-
-
+      if (!state.tagList || state.tagList.length === 0) {
+        state.tagList = defaultTagOut
+        store.commit('saveTag')
+      }
     },
     createRecord(state, record) {
       const record2: RecordItem = clone(record);
       record2.createAt = new Date().toISOString();
       state.recordList.push(record2);
-      store.commit('saveRecords')
+      store.commit('saveRecords');
+      alert("添加记账成功！")
     },
     saveRecords(state) {
       window.localStorage.setItem("recordList", JSON.stringify(state.recordList));
@@ -68,24 +70,19 @@ const store = new Vuex.Store({
     findTag(state, id: string) {
       state.currentTag = state.tagList.filter(t => t.id === id)[0]
     },
-    createTag(state) {
-      const name = window.prompt("输出标签名");
-      if (!name) {
-        window.alert("标签名不能为空");
-      } else {
-        const names = state.tagList.map(item => item.name)
-        if (names && names.indexOf(name) >= 0) {
-          alert("该标签已存在，不可重复创建！")
-
-        }
-        else {
-          const id = createID().toString()
-          state.tagList.push({ id, name: name })
-          store.commit('saveTag')
-          alert("创建成功！")
-        }
-
-      }
+    setCurrentType(state, type: '+' | '-') {
+      // console.log(type);
+      state.currentType = type
+    },
+    setCurrentTag(state, tag: Tag) {
+      // console.log(tag.name);
+      state.currentTag = tag;
+    },
+    createTag(state, tag: Tag) {
+      tag.id = createID().toString()
+      state.tagList.splice(state.tagList.length, 0, tag)
+      store.commit('saveTag')
+      alert("创建成功！")
     },
     updateTag(state, object: { id: string, name: string }) {
       const { id, name } = object
@@ -99,7 +96,7 @@ const store = new Vuex.Store({
           const tag = state.tagList.filter(t => t.id === id)[0]
           tag.name = name
           store.commit('saveTag')
-          return 'success'
+          alert("成功修改标签名")
 
         }
       }

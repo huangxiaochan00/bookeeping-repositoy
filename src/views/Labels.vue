@@ -11,9 +11,10 @@
     </router-link>
 
     <div class="createTag-wrapper">
-      <!-- <router-link to="/labels/add"> -->
-      <Button @click="createTag">新增标签</Button>
-      <!-- </router-link> -->
+      <router-link to="/addLabel">
+        <!-- <router-link to="/labels/add"> -->
+        <Button>新增标签</Button>
+      </router-link>
     </div>
   </Layout>
 </template>
@@ -35,7 +36,7 @@ export default class Label extends Vue {
     return this.$store.state.tagList;
   }
   createTag() {
-    this.$store.commit("createTag");
+    // this.$store.commit("createTag");
   }
 }
 </script>

@@ -8,7 +8,7 @@
       @update:note="onUpdateNote"
       :value="record.note"
     />
-    <Tag @update:selected="onUpdateSelected" />
+    <Tag @update:selected="onUpdateSelected" :type="record.type" />
     <Tab :value.sync="record.type" :dataSource="typeList" />
     <!-- <Tag /> -->
   </Layout>
@@ -17,7 +17,7 @@
 <script lang='ts'>
 import { Component, Watch } from "vue-property-decorator";
 import Vue from "vue";
-import Tag from "@/components/Tag.vue";
+import Tag from "@/components/TagSection.vue";
 import NumberPad from "@/components/NumberPad.vue";
 import Note from "@/components/Note.vue";
 import Tab from "@/components/Tab.vue";
@@ -43,6 +43,7 @@ export default class Money extends Vue {
   }
   created() {
     this.$store.commit("fetchRecords");
+    this.$store.commit("setCurrentType", "-");
   }
   onUpdateSelected(tag: string) {
     this.record.tag = tag;
@@ -52,9 +53,9 @@ export default class Money extends Vue {
   }
   saveRecord() {
     this.$store.commit("createRecord", this.record);
+    // this.$store.commit("setCurrentType", "-");
     this.record.type = "-";
     this.record.note = "";
-    // this.record.amount = 0;
   }
   // onUpdateAmount() {
   //   this.record.amount = 0;

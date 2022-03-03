@@ -19,7 +19,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  max-width: 50vw;
+  max-width: 500px;
   margin: 0 auto;
   // justify-content: center;
   background: rgb(244, 246, 245);

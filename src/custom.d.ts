@@ -9,7 +9,9 @@ type RecordItem = {
 type MyState = {
     recordList: RecordItem[],
     tagList: Tag[],
-    currentTag?: Tag
+    defaultTags: Tag[],
+    currentTag?: Tag,
+    currentType: '+' | '-'
 }
 type Tag = {
     id: string,

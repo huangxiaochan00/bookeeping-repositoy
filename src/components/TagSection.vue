@@ -2,42 +2,52 @@
   <div class="tag">
     <ol>
       <li
-        :class="selectedTag == tag.name ? 'selected' : ''"
+        :class="{ selected: currentTag === tag }"
         v-for="tag in tagList"
         :key="tag.id"
-        @click="selected(tag.name)"
+        @click="selected(tag)"
       >
-        <Icon name="add" />
+        <Icon :name="`${tag.icon}`" />
         {{ tag.name }}
       </li>
-
-      <li @click="createTag">添加</li>
+      <li>
+        <router-link to="/addLabel">
+          <Icon name="add" />
+        </router-link>
+        添加
+      </li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
     </ol>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
-// import tagListModel from "@/models/tagListModel.ts";
-// import store from "@/store/index2";
 import Vue from "vue";
+import clone from "@/lib/clone";
 @Component
-export default class Tag extends Vue {
-  // @Prop() dataSource: string[] | undefined;
-  // tagList = store.tagList;
-  // console.log(tagList);
-  // tagList = [];
-  selectedTag = "1";
-  get tagList() {
-    return this.$store.state.tagList;
+export default class TagSection extends Vue {
+  @Prop(String) readonly type!: string;
+  // selectedTag = "1";
+  // currentTag?: Tag | undefined;
+  get currentTag() {
+    return this.$store.state.currentTag;
   }
-  selected(tag: string) {
-    this.selectedTag = tag;
-    // console.log(this.selectedTag);
-    this.$emit("update:selected", this.selectedTag);
+  get tagList() {
+    const tagList: Tag[] = clone(this.$store.state.tagList).filter(
+      (r: Tag) => r.type === this.type || r.type === "all"
+    );
+    return tagList;
+  }
+  selected(tag: Tag) {
+    // this.currentTag = tag;
+    this.$emit("update:selected", tag.name);
+    this.$store.commit("setCurrentTag", tag);
   }
   created() {
-    // store.createTag();
     this.$store.commit("fetchTag");
   }
   createTag() {
@@ -61,7 +71,7 @@ export default class Tag extends Vue {
     flex-wrap: wrap;
     justify-content: space-evenly;
     > li {
-      border: 1px red solid;
+      // border: 1px red solid;
       border-radius: 18px;
       display: flex;
       width: 70px;
