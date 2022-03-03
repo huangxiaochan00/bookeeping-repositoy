@@ -1,13 +1,23 @@
 <template>
   <Layout class-prefix="money">
     <NumberPad :amount.sync="record.amount" @submit="saveRecord" />
+    <div class="wrapper">
+      <Note
+        file-name="备注"
+        placeholder="在这里添加备注"
+        :value.sync="record.note"
+        class="note"
+      />
+      <Note
+        file-name=""
+        type="date"
+        placeholder="在这里添加备注"
+        :value.sync="record.createAt"
+        class="date"
+      />
+    </div>
 
-    <Note
-      file-name="备注"
-      placeholder="在这里添加备注"
-      @update:note="onUpdateNote"
-      :value="record.note"
-    />
+    <!-- {{ this.record.createAt }} -->
     <Tag @update:selected="onUpdateSelected" :type="record.type" />
     <Tab :value.sync="record.type" :dataSource="typeList" />
     <!-- <Tag /> -->
@@ -36,6 +46,7 @@ export default class Money extends Vue {
     note: "",
     type: "-",
     amount: 0,
+    createAt: new Date().toISOString(),
   };
   typeList = typeList;
   get recordList() {
@@ -48,23 +59,14 @@ export default class Money extends Vue {
   onUpdateSelected(tag: string) {
     this.record.tag = tag;
   }
-  onUpdateNote(note: string) {
-    this.record.note = note;
+  onUpdateDate(date: string) {
+    this.record.createAt = date;
   }
   saveRecord() {
     this.$store.commit("createRecord", this.record);
-    // this.$store.commit("setCurrentType", "-");
     this.record.type = "-";
     this.record.note = "";
   }
-  // onUpdateAmount() {
-  //   this.record.amount = 0;
-  //   console.log("d");
-  // }
-  // @Watch("recordList")
-  // onRecordChange() {
-  //   recordListModel.save(this.recordList);
-  // }
 }
 </script>
 
@@ -74,7 +76,15 @@ export default class Money extends Vue {
   flex-direction: column-reverse;
 }
 .wrapper {
+  display: flex;
   padding: 4px;
   align-items: center;
+}
+.note {
+  margin: 8px 0;
+}
+.date {
+  width: auto;
+  /* height: 33px; */
 }
 </style>

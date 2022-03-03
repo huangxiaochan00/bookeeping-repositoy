@@ -1,18 +1,30 @@
 <template>
   <div class="note">
     <label>
-      <span class="name">{{ this.fileName }}</span>
-      <input
-        type="text"
-        :value="this.value"
-        :placeholder="this.placeholder"
-        @input="onChangeValue($event.target.value)"
-      />
+      <template v-if="type === 'date'">
+        <span class="name">{{ this.fileName }}</span>
+        <input
+          :type="type || 'text'"
+          :value="x(value)"
+          :placeholder="placeholder"
+          @input="onChangeValue($event.target.value)"
+        />
+      </template>
+      <template v-else>
+        <span class="name">{{ this.fileName }}</span>
+        <input
+          :type="type || 'text'"
+          :value="value"
+          :placeholder="placeholder"
+          @input="onChangeValue($event.target.value)"
+        />
+      </template>
     </label>
   </div>
 </template>
 
 <script lang="ts">
+import dayjs from "dayjs";
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 
@@ -21,20 +33,22 @@ export default class Note extends Vue {
   @Prop({ default: "" }) readonly value!: string;
   @Prop({ required: true }) fileName!: string;
   @Prop() placeholder?: string;
-
+  @Prop() type?: string;
+  @Prop() classPrefix?: string;
   // @Watch("value")
   onChangeValue(value: string) {
-    this.$emit("update:note", value);
+    this.$emit("update:value", value);
+  }
+  x(isoString: string) {
+    return dayjs(isoString).format("YYYY-MM-DD");
   }
 }
 </script>
 
 <style scoped lang="scss">
 .note {
-  // background: rgb(244, 246, 245);
-  font-size: 18px;
-  padding: 10px 0;
-  // height: 60px;
+  background: rgb(244, 246, 245);
+  font-size: 14px;
   > label {
     display: flex;
     align-items: center;

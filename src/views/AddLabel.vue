@@ -52,7 +52,7 @@ export default class AddLabel extends Vue {
     const tagList: Tag[] = this.$store.state.tagList;
     // const currentTag = this.$store.state.currentType;
     const defaultTags = this.$store.state.defaultTags;
-    // const defaultTags: Tag[] = clone(this.$store.state.defaultTags).fi444 4lter(
+    // const defaultTags: Tag[] = clone(this.$store.state.defaultTags).filter(
     //   (r: Tag) => r.type === currentTag || r.type === "all"
     // );
     for (let i = 0; i < defaultTags.length; i++) {
