@@ -1259,6 +1259,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/echarts@^4.9.13":
+  version "4.9.13"
+  resolved "https://registry.npmmirror.com/@types/echarts/-/echarts-4.9.13.tgz#b4a56f8ff471af65dd54b196af6972629d6745d4"
+  integrity sha512-xqZ21MXOBU5i+BywnxAi0He+M6lsRtANBvbqJHmqM8T64Lx7azHJWbv/vSKVJfEbv3XyYpxeDhpV7gFi5mfgeA==
+  dependencies:
+    "@types/zrender" "*"
+
 "@types/express-serve-static-core@*", "@types/express-serve-static-core@^4.17.18":
   version "4.17.28"
   resolved "https://registry.npmmirror.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.28.tgz#c47def9f34ec81dc6328d0b1b5303d1ec98d86b8"
@@ -1458,6 +1465,11 @@
   integrity sha512-qCxJE1qgz2y0hA4pIxjBR+PelCH0U5CK1XJXFwCNqfmliatKp47UCXXE9Dyk1OXBDLvsCF57TqQEJaeLfDYEOQ==
   dependencies:
     "@types/yargs-parser" "*"
+
+"@types/zrender@*":
+  version "4.0.1"
+  resolved "https://registry.npmmirror.com/@types/zrender/-/zrender-4.0.1.tgz#6280c40207927ce086be24b4391d668cd330e956"
+  integrity sha512-IyTRf30jPOXK1+1RChI/78U6aV9hyWYf/vhL96Vt66oDz9es/BDjeKpvbNZSOHVA7zAReOwJcmdZS5AGAqhygw==
 
 "@typescript-eslint/eslint-plugin@^4.18.0":
   version "4.33.0"
