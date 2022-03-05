@@ -31,8 +31,7 @@ import clone from "@/lib/clone";
 @Component
 export default class TagSection extends Vue {
   @Prop(String) readonly type!: string;
-  // selectedTag = "1";
-  // currentTag?: Tag | undefined;
+ 
   get currentTag() {
     return this.$store.state.currentTag;
   }
@@ -43,7 +42,6 @@ export default class TagSection extends Vue {
     return tagList;
   }
   selected(tag: Tag) {
-    // this.currentTag = tag;
     this.$emit("update:selected", tag.name);
     this.$store.commit("setCurrentTag", tag);
   }
@@ -71,7 +69,6 @@ export default class TagSection extends Vue {
     flex-wrap: wrap;
     justify-content: space-evenly;
     > li {
-      // border: 1px red solid;
       border-radius: 18px;
       display: flex;
       width: 70px;

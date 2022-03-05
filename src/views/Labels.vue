@@ -12,7 +12,6 @@
 
     <div class="createTag-wrapper">
       <router-link to="/addLabel">
-        <!-- <router-link to="/labels/add"> -->
         <Button>新增标签</Button>
       </router-link>
     </div>
@@ -23,7 +22,6 @@
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import Button from "@/components/Button.vue";
-// import store from "@/store/index2";
 
 @Component({
   components: {
@@ -34,9 +32,6 @@ export default class Label extends Vue {
   get tagList() {
     this.$store.commit("fetchTag");
     return this.$store.state.tagList;
-  }
-  createTag() {
-    // this.$store.commit("createTag");
   }
 }
 </script>

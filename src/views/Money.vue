@@ -16,11 +16,8 @@
         class="date"
       />
     </div>
-
-    <!-- {{ this.record.createAt }} -->
     <Tag @update:selected="onUpdateSelected" :type="record.type" />
     <Tab :value.sync="record.type" :dataSource="typeList" />
-    <!-- <Tag /> -->
   </Layout>
 </template>
 
@@ -85,6 +82,5 @@ export default class Money extends Vue {
 }
 .date {
   width: auto;
-  /* height: 33px; */
 }
 </style>

@@ -31,10 +31,6 @@ export default class Type extends Vue {
   @Prop(String) readonly type!: string;
   @Prop(String) classPrefix?: string;
   selectedType(type: string) {
-    // if (type !== "-" || type != ="+") {
-    //   throw new Error("type is unknown");
-    // }
-
     this.$emit("update:type", type);
   }
 }
@@ -59,7 +55,6 @@ export default class Type extends Vue {
       content: "";
       display: block;
       height: 3px;
-      // background: #333;
       position: absolute;
       bottom: 0;
       width: 100%;

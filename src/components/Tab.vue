@@ -27,7 +27,6 @@ export default class Type extends Vue {
   @Prop({ required: true, type: Array }) dataSource!: dataSourceItem[];
 
   select(item: dataSourceItem) {
-    // this.$store.commit("setCurrentType", item.value);
     this.$emit("update:value", item.value);
   }
 }

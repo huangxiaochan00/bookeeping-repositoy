@@ -26,7 +26,6 @@ import Vue from "vue";
 import Note from "@/components/Note.vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
 import Button from "@/components/Button.vue";
-// import store from "@/store/index2";
 @Component({
   components: {
     Note,
@@ -45,8 +44,6 @@ export default class EditTag extends Vue {
   }
 
   removeTag() {
-    // console.log("d");
-
     if (this.currentTag) {
       this.$store.commit("removeTag", this.currentTag.id);
       alert("删除成功！");

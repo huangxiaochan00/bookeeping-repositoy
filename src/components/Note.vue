@@ -35,7 +35,6 @@ export default class Note extends Vue {
   @Prop() placeholder?: string;
   @Prop() type?: string;
   @Prop() classPrefix?: string;
-  // @Watch("value")
   onChangeValue(value: string) {
     this.$emit("update:value", value);
   }

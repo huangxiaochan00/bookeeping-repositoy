@@ -21,7 +21,6 @@ export default {
   height: 100vh;
   max-width: 500px;
   margin: 0 auto;
-  // justify-content: center;
   background: rgb(244, 246, 245);
 }
 .content {
