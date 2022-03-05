@@ -86,6 +86,8 @@ const store = new Vuex.Store({
     updateTag(state, object: { id: string, name: string }) {
       const { id, name } = object
       const idList = state.tagList.map(t => t.id)
+      // console.log(idList);
+
       if (idList.indexOf(id) >= 0) {
         const names = state.tagList.map(t => t.name)
         if (names.indexOf(name) >= 0) {
@@ -95,8 +97,6 @@ const store = new Vuex.Store({
           const tag = state.tagList.filter(t => t.id === id)[0]
           tag.name = name
           store.commit('saveTag')
-          alert("成功修改标签名")
-
         }
       }
       else {

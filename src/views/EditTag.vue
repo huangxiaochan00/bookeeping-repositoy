@@ -11,7 +11,7 @@
           :value="currentTag.name"
           file-name="标签名"
           placeholder="在这里修改标签名"
-          @update:note="updateTag"
+          @update:value="updateTag"
         />
       </div>
       <div class="button-wrapper">
@@ -61,7 +61,7 @@ export default class EditTag extends Vue {
     this.$router.back();
   }
   updateTag(name: string) {
-    //   // console.log(name);
+    console.log(name);
     if (this.currentTag) {
       this.$store.commit("updateTag", { id: this.currentTag.id, name });
     }
